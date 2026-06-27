@@ -1,3 +1,4 @@
+from learning import learn
 from memory import save_message
 import json
 from utils import clean_text
@@ -13,19 +14,27 @@ class AIChatbot:
     question = clean_text(question)
 
     if question in self.knowledge:
+
         answer = self.knowledge[question]
-    else:
 
-        answer = (
-            "I don't know that yet. "
-            "I'm still learning."
-        )
+        save_message(question, answer)
 
-    save_message(question, answer)
+        return answer
 
-    return answer
+    print("\nAI: I don't know the answer to that.")
 
-        return (
-            "I don't know the answer to that yet. "
-            "Try asking something else."
-        )
+    choice = input("Would you like to teach me? (yes/no): ").lower()
+
+    if choice == "yes":
+
+        new_answer = input("Type the correct answer: ")
+
+        learn(question, new_answer)
+
+        self.knowledge[question] = new_answer
+
+        save_message(question, new_answer)
+
+        return "Thank you! I've learned something new."
+
+    return "Okay! Maybe next time."
