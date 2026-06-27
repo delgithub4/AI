@@ -1,3 +1,4 @@
+from memory import save_message
 import json
 from utils import clean_text
 
@@ -8,14 +9,21 @@ class AIChatbot:
             self.knowledge = json.load(file)
 
     def respond(self, question):
-        question = clean_text(question)
 
-        if question in self.knowledge:
-            return self.knowledge[question]
+    question = clean_text(question)
 
-        for key in self.knowledge:
-            if key in question:
-                return self.knowledge[key]
+    if question in self.knowledge:
+        answer = self.knowledge[question]
+    else:
+
+        answer = (
+            "I don't know that yet. "
+            "I'm still learning."
+        )
+
+    save_message(question, answer)
+
+    return answer
 
         return (
             "I don't know the answer to that yet. "
