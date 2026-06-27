@@ -1,6 +1,12 @@
 {
-  "hello": "Hello! Nice to meet you.",
-  "what is ai": "Artificial Intelligence is the simulation of human intelligence by computers.",
-  "who made you": "I was created as part of this AI project.",
-  "bye": "Goodbye!"
+    "hello": "Hello! How can I help you today?",
+    "hi": "Hi there!",
+    "good morning": "Good morning! Hope you have a productive day.",
+    "good afternoon": "Good afternoon!",
+    "good evening": "Good evening!",
+    "what is ai": "Artificial Intelligence enables computers to perform tasks that normally require human intelligence.",
+    "who made you": "I am part of the AI repository project.",
+    "what is python": "Python is a popular programming language used in AI, web development, automation, and data science.",
+    "what can you do": "I can answer basic questions from my knowledge base.",
+    "bye": "Goodbye! See you next time."
 }
