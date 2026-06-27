@@ -1,3 +1,4 @@
+from difflib import get_close_matches
 from learning import learn
 from memory import save_message
 import json
@@ -9,32 +10,55 @@ class AIChatbot:
         with open("data/knowledge.json", "r") as file:
             self.knowledge = json.load(file)
 
-    def respond(self, question):
+    def find_best_match(self, question):
+
+    questions = self.knowledge.keys()
+
+    match = get_close_matches(
+        question,
+        questions,
+        n=1,
+        cutoff=0.6
+    )
+
+    if match:
+        return match[0]
+
+    return None
+            
+
+   def respond(self, question):
 
     question = clean_text(question)
 
     if question in self.knowledge:
 
         answer = self.knowledge[question]
-
         save_message(question, answer)
-
         return answer
 
-    print("\nAI: I don't know the answer to that.")
+    best_match = self.find_best_match(question)
 
-    choice = input("Would you like to teach me? (yes/no): ").lower()
+    if best_match:
+
+        answer = self.knowledge[best_match]
+        save_message(question, answer)
+        return answer
+
+    print("\nAI: I don't know the answer.")
+
+    choice = input("Teach me? (yes/no): ").lower()
 
     if choice == "yes":
 
-        new_answer = input("Type the correct answer: ")
+        answer = input("Correct answer: ")
 
-        learn(question, new_answer)
+        learn(question, answer)
 
-        self.knowledge[question] = new_answer
+        self.knowledge[question] = answer
 
-        save_message(question, new_answer)
+        save_message(question, answer)
 
-        return "Thank you! I've learned something new."
+        return "Thanks! I've learned something new."
 
-    return "Okay! Maybe next time."
+    return "No problem."
