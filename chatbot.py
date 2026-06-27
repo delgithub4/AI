@@ -8,10 +8,16 @@ class AIChatbot:
             self.knowledge = json.load(file)
 
     def respond(self, question):
-
         question = clean_text(question)
 
         if question in self.knowledge:
             return self.knowledge[question]
 
-        return "Sorry, I don't know the answer yet."
+        for key in self.knowledge:
+            if key in question:
+                return self.knowledge[key]
+
+        return (
+            "I don't know the answer to that yet. "
+            "Try asking something else."
+        )
