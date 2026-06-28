@@ -1,5 +1,7 @@
 from fastapi import FastAPI, Request
-from fastapi.responses import JSONResponse
+
+from core.logging_config import logger
+from core.responses import error
 
 
 def register_exception_handlers(app: FastAPI):
@@ -9,11 +11,10 @@ def register_exception_handlers(app: FastAPI):
         request: Request,
         exc: Exception,
     ):
-        return JSONResponse(
+        logger.exception(exc)
+
+        return error(
+            message="Internal Server Error",
+            errors=[str(exc)],
             status_code=500,
-            content={
-                "success": False,
-                "message": "Internal Server Error",
-                "detail": str(exc),
-            },
         )
