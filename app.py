@@ -10,18 +10,19 @@ from routes.health import router as health_router
 app = FastAPI(
     title=settings.APP_NAME,
     version=settings.APP_VERSION,
-    lifespan=lifespan
+    lifespan=lifespan,
 )
 
 app.include_router(ai_router)
 app.include_router(health_router)
 
 
-@app.get("/")
+@app.get("/", tags=["Root"])
 def home():
 
     return {
         "service": settings.APP_NAME,
         "version": settings.APP_VERSION,
-        "status": "running"
+        "environment": settings.ENVIRONMENT,
+        "status": "running",
     }
