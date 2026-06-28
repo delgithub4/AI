@@ -6,8 +6,14 @@ from core.logging_config import logger
 @asynccontextmanager
 async def lifespan(app):
 
-    logger.info("Starting service...")
+    logger.info("======================================")
+    logger.info("Starting %s...", app.title)
+    logger.info("Application is ready.")
+    logger.info("======================================")
 
     yield
 
-    logger.info("Service stopped.")
+    logger.info("======================================")
+    logger.info("Shutting down %s...", app.title)
+    logger.info("Application stopped.")
+    logger.info("======================================")
