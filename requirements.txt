@@ -1,13 +1,16 @@
 fastapi
 uvicorn[standard]
-python-dotenv
+
+pydantic
 pydantic-settings
+
+python-dotenv
 
 httpx
 
-python-multipart
-
 orjson
+
+python-multipart
 
 structlog
 
@@ -15,7 +18,5 @@ pytest
 pytest-asyncio
 pytest-cov
 
-ruff
 black
-
-docker
+ruff
