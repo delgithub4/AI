@@ -1,19 +1,18 @@
-__pycache__
+__pycache__/
 *.pyc
-*.pyo
 
 .git
 .gitignore
 
 .env
 
-venv
-.venv
+venv/
+.venv/
 
-.idea
-.vscode
+.vscode/
+.idea/
 
-.pytest_cache
+.pytest_cache/
 
-dist
-build
+build/
+dist/
