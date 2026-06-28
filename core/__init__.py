@@ -1,1 +1,3 @@
-# Core package
+"""
+Core components shared across the application.
+"""
