@@ -1,7 +1,9 @@
 from fastapi import FastAPI
 
 from core.config import settings
+from core.exceptions import register_exception_handlers
 from core.lifespan import lifespan
+from core.middleware import register_middleware
 
 from routes.ai import router as ai_router
 from routes.health import router as health_router
@@ -10,15 +12,19 @@ from routes.health import router as health_router
 app = FastAPI(
     title=settings.APP_NAME,
     version=settings.APP_VERSION,
+    debug=settings.DEBUG,
     lifespan=lifespan,
 )
 
-app.include_router(ai_router)
+register_middleware(app)
+register_exception_handlers(app)
+
 app.include_router(health_router)
+app.include_router(ai_router)
 
 
 @app.get("/", tags=["Root"])
-def home():
+async def root():
 
     return {
         "service": settings.APP_NAME,
