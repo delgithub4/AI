@@ -4,12 +4,12 @@ __pycache__/
 *.pyo
 *.pyd
 
-# Virtual environments
+# Virtual Environments
 venv/
 .venv/
 env/
 
-# Environment variables
+# Environment Variables
 .env
 
 # IDE
@@ -27,14 +27,14 @@ htmlcov/
 # Logs
 *.log
 
-# OS
-.DS_Store
-Thumbs.db
-
-# Python packaging
-*.egg-info/
-build/
+# Build
 dist/
+build/
+*.egg-info/
 
 # Docker
 *.pid
+
+# OS
+.DS_Store
+Thumbs.db
