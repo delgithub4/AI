@@ -4,16 +4,16 @@ from core.config import settings
 
 router = APIRouter(
     prefix="/health",
-    tags=["Health"]
+    tags=["Health"],
 )
 
 
 @router.get("/")
-def health():
+async def health():
 
     return {
         "status": "healthy",
         "service": settings.APP_NAME,
         "version": settings.APP_VERSION,
-        "environment": settings.ENVIRONMENT
+        "environment": settings.ENVIRONMENT,
     }
