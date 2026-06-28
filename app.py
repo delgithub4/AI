@@ -1,17 +1,27 @@
-from chatbot import AIChatbot
+from fastapi import FastAPI
 
-bot = AIChatbot()
+from core.config import settings
+from core.lifespan import lifespan
 
-print("=" * 40)
-print("      AI PERSONAL ASSISTANT")
-print("=" * 40)
+from routes.ai import router as ai_router
+from routes.health import router as health_router
 
-while True:
-    question = input("\nYou: ")
 
-    if question.lower() in ["exit", "quit", "bye"]:
-        print("AI: Goodbye!")
-        break
+app = FastAPI(
+    title=settings.APP_NAME,
+    version=settings.APP_VERSION,
+    lifespan=lifespan
+)
 
-    answer = bot.respond(question)
-    print("AI:", answer)
+app.include_router(ai_router)
+app.include_router(health_router)
+
+
+@app.get("/")
+def home():
+
+    return {
+        "service": settings.APP_NAME,
+        "version": settings.APP_VERSION,
+        "status": "running"
+    }
